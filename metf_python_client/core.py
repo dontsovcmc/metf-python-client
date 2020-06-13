@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import time
 from requests import Session
-from utils import str2hex, hex2str
-from logger import log
+from metf_python_client.utils import str2hex, hex2str
+from metf_python_client.logger import log
 
 HIGH = 0x1
 LOW = 0x0
