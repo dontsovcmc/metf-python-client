@@ -1,7 +1,16 @@
-# ESPTestFramework
+# METF Python Client
 Test your hardware by ESP using HTTP requests.
 
-I need to test AVR board firmware. I connect ESP8266 to AVR, run web server and coding Python test scripts.
+
+## Goal
+Continuous Integration in hardware development
+
+
+## Start
+1. Connect you MCU to ESP
+2. Upload [METF firmware](https://github.com/dontsovcmc/metf) to ESP
+3. Write Python test script and run it.
+
 
 ### Equipment
 - ESP board. It will be a HTTP web server controlled by PC
@@ -9,12 +18,6 @@ I need to test AVR board firmware. I connect ESP8266 to AVR, run web server and 
 
 Default board: NodeMCU.
 Change platformio.ini file to use another WeMos or etc.
-
-## 3 Steps
-
-1. Upload ESPTestFramework firmware to NodeMCU (add you WiFi ssid&pwd)
-2. Connect you device to NodeMCU, turn on NodeMCU. Web server runs.
-3. Write Python test script and run it.
 
 ## Actions
 
