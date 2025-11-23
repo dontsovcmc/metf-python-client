@@ -111,4 +111,56 @@ class METFClient:
         ret = self.i2c('flush')
         assert ret.text == 'OK', ret.text
 
+    def serial_begin(self, baud: int = 115200):
+        log.info('serial_begin baudrate={}'.format(baud))
+        data = {'baudrate': baud}
+        ret = self._sess.post(self._root + '/serial', data=data, timeout=self._timeout)
+        ret.raise_for_status()
 
+    def serial_flush(self):
+        log.info('serial_flush')
+        data = {'flush': '1'}
+        ret = self._sess.post(self._root + '/serial', data=data, timeout=self._timeout)
+        ret.raise_for_status()
+
+    def serial_read(self):
+        log.info('serial_read')
+        ret = self._sess.get(self._root + '/read', timeout=self._timeout)
+        ret.raise_for_status()
+        return ret.text
+
+    def serial_readlines(self,
+                         wait: int = 5000,
+                         delimiter: str | None = '\n',
+                         prefix: str | None = '00:') \
+            -> str | list[str] | None:
+        """
+        serial port sniffering for wait ms
+
+        :param wait: ms timeout
+        :param delimiter: separate to lines if delimiter defined
+        :param prefix: merge lines if prefix defined
+        :return:
+        """
+        d = '\\n' if delimiter == '\n' else delimiter
+        log.info(f'serial_readlines wait {wait} ms, delimiter={d}, prefix={prefix}')
+
+        t = time.time()
+        out = []
+        while time.time() - t < wait / 1000:
+            ret = self._sess.get(self._root + '/read', timeout=self._timeout)
+            ret.raise_for_status()
+
+            if ret.text:
+                if delimiter:
+                    lines = ret.text.split(delimiter)
+                    for line in lines:
+                        if line.startswith(prefix) or not out:
+                            out.append(line)
+                        else:
+                            out[-1] += line
+                    return out
+                else:
+                    return ret.text
+
+            time.sleep(0.5)

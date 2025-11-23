@@ -179,6 +179,17 @@ ret = api.i2c_ask(address, message, answer_len)
 assert ord(ret[0]) == 1, 'response not 1'
 ```
 
+## Serial port sniffering (METF >=0.0.2)
+```
+api = METFClient(ESP_HOST)
+api.serial_begin()
+s = api.serial_read()  # return string or ''
+
+# wait 5000 ms for Serial data and separate them into lines
+lines = api.serial_readlines(wait=5000, delimiter='\n', prefix='00:')
+
+```
+
 ## Unpack binary structures
 
 ```
