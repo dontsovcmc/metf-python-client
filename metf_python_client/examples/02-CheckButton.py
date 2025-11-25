@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from metf_python_client import METFClient, LOW, HIGH, INPUT_PULLUP
-from metf_python_client.boards.nodemcu import D5
+from metf_python_client import METFClient
+from metf_python_client.boards.nodemcu import D5, LOW, HIGH, INPUT_PULLUP
 
 
 ESP_HOST = '192.168.3.49'

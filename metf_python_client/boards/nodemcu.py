@@ -3,6 +3,15 @@
 # NodeMCU - ESP8266 GPIO
 # https://randomnerdtutorials.com/esp8266-pinout-reference-gpios/
 
+
+HIGH = 0x1
+LOW = 0x0
+
+INPUT = 0x00
+INPUT_PULLUP = 0x02
+OUTPUT = 0x01
+
+
          # IN        #   OUT  #
 
 D0 = 16  # no        # no PWM or i2c support #  HIGH at boot used to wake up from deep sleep

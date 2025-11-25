@@ -4,13 +4,6 @@ from requests import Session
 from metf_python_client.utils import str2hex, hex2str
 from metf_python_client.logger import log
 
-HIGH = 0x1
-LOW = 0x0
-
-INPUT = 0x00
-INPUT_PULLUP = 0x02
-OUTPUT = 0x01
-
 
 class METFClient:
     def __init__(self, host, port=80, **kwargs):
@@ -69,9 +62,9 @@ class METFClient:
             time.sleep(0.3)
         return time.time() - t < timeout
 
-    def blynk(self, pin, duration=1000, invert=False):
-        turn_on = LOW if invert else HIGH
-        turn_off = HIGH if invert else LOW
+    def blynk(self, pin, duration: int = 1000, invert: bool = False, low: int = 0x0, high: int = 0x1):
+        turn_on = low if invert else high
+        turn_off = high if invert else low
         self.digitalWrite(pin, turn_on)
         self.delay(duration)
         self.digitalWrite(pin, turn_off)

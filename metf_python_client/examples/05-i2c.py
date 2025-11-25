@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from metf_python_client import METFClient, LOW, HIGH, INPUT
-from metf_python_client.boards.nodemcu import D2, D3, D4, D6, D7
+from metf_python_client import METFClient
+from metf_python_client.boards.nodemcu import D2, D3, D4, D6, D7, LOW, HIGH, INPUT
 from metf_python_client import log
 
 from requests.exceptions import HTTPError

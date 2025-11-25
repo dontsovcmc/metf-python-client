@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
-from metf_python_client import METFClient, HIGH, LOW, OUTPUT
-from metf_python_client.boards.nodemcu import LED_BUILTIN_AUX
+from metf_python_client import METFClient
+from metf_python_client.boards.nodemcu import LED_BUILTIN_AUX, HIGH, LOW, OUTPUT
 
 
 ESP_HOST = '192.168.3.49'
