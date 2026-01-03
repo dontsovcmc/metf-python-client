@@ -64,4 +64,3 @@ LED_BUILTIN = GPIO15
 # Special pins
 BOOT = GPIO9  # Boot mode pin
 FLASH_BUTTON = GPIO0  # Usually connected to boot button
-

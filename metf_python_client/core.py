@@ -157,3 +157,29 @@ class METFClient:
                     return ret.text
 
             time.sleep(0.5)
+
+    def rgb_begin(self):
+        data = {'action': 'begin'}
+
+        ret = self._sess.post(self._root + '/rgb', data=data, timeout=self._timeout)
+        if ret.status_code != 200:
+            raise Exception('HTTP Error (' + str(ret.status_code) + '): ' + ret.text)
+        assert ret.text == 'OK', ret.text
+
+    def rgb_brightness(self, value: int):
+        data = {'action': 'brightness',
+                'value': value}
+
+        ret = self._sess.post(self._root + '/rgb', data=data, timeout=self._timeout)
+        if ret.status_code != 200:
+            raise Exception('HTTP Error (' + str(ret.status_code) + '): ' + ret.text)
+        assert ret.text == 'OK', ret.text
+
+    def rgb_color(self, value: str):
+        data = {'action': 'color',
+                'value': value}
+
+        ret = self._sess.post(self._root + '/rgb', data=data, timeout=self._timeout)
+        if ret.status_code != 200:
+            raise Exception('HTTP Error (' + str(ret.status_code) + '): ' + ret.text)
+        assert ret.text == 'OK', ret.text
