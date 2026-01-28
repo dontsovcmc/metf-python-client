@@ -1,3 +1,5 @@
-include *.md
+include README.md
 include LICENSE
-recursive-include metf-python-client/*.py
+include CHANGELOG.md
+include requirements.txt
+recursive-include metf_python_client *.py

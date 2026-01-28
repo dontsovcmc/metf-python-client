@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
     #
     ext = 'zip' if sys.platform == 'win32' else 'gztar'
-    call(['python', 'setup.py', 'sdist', '--formats=' + ext, 'bdist_wheel'])
+    call(['python3', 'setup.py', 'sdist', '--formats=' + ext, 'bdist_wheel'])
 
     # remove service directories
     for d in ['build', 'metf_python_client.egg-info']:
