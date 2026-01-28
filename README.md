@@ -474,14 +474,22 @@ The ESP board runs METF firmware, which provides an HTTP API for hardware contro
 ### Install Development Dependencies
 
 ```bash
-# Install package with dev dependencies
+# Option 1: Install package with dev dependencies
 pip install metf-python-client[dev]
 
-# Or install from source
+# Option 2: Install from source with requirements_dev.txt (recommended for contributors)
+git clone https://github.com/dontsovcmc/metf-python-client
+cd metf-python-client
+pip install -r requirements_dev.txt
+pip install -e .
+
+# Option 3: Install from source with dev dependencies
 git clone https://github.com/dontsovcmc/metf-python-client
 cd metf-python-client
 pip install -e .[dev]
 ```
+
+**Note:** `requirements_dev.txt` includes all tools needed for development, testing, code quality checks, and publishing to PyPI.
 
 ### Run Tests
 
@@ -501,6 +509,21 @@ flake8 metf_python_client/
 # Type checking
 mypy metf_python_client/
 ```
+
+### Build and Publish
+
+```bash
+# Build package
+python3 -m build
+
+# Check build
+twine check dist/*
+
+# Publish to PyPI (maintainers only)
+twine upload dist/*
+```
+
+For detailed publishing instructions, see [CONTRIBUTING.md](CONTRIBUTING.md#publishing-to-pypi).
 
 ---
 

@@ -14,8 +14,7 @@ Install pip if not present:
 
 ## Create package
 
-1. python build.py
-or python setup.py sdist bdist_wheel
+1. python -m build
 
 ## Upload package
 

@@ -58,13 +58,19 @@ venv\Scripts\activate
 ### 3. Install Dependencies
 
 ```bash
-# Install package in development mode with dev dependencies
+# Option 1: Install package in development mode with dev dependencies
 pip install -e .[dev]
 
-# Or install dependencies manually
+# Option 2: Install from requirements_dev.txt (recommended)
+pip install -r requirements_dev.txt
 pip install -e .
-pip install pytest pytest-cov black flake8 mypy
+
+# Option 3: Install dependencies manually
+pip install -e .
+pip install pytest pytest-cov black flake8 mypy build twine wheel
 ```
+
+**Note:** `requirements_dev.txt` includes all tools needed for development, testing, and publishing.
 
 ### 4. Verify Installation
 
@@ -174,10 +180,14 @@ class TestMETFClient(unittest.TestCase):
 1. **PyPI Account**: Create account at [https://pypi.org/account/register/](https://pypi.org/account/register/)
 2. **TestPyPI Account** (optional but recommended): [https://test.pypi.org/account/register/](https://test.pypi.org/account/register/)
 3. **API Token**: Generate API token from PyPI account settings
-4. **Required Tools**: Install `build` and `twine`
+4. **Required Tools**: Install `build`, `twine`, and `wheel`
 
 ```bash
-pip install build twine
+# Install from requirements_dev.txt (includes all publishing tools)
+pip install -r requirements_dev.txt
+
+# Or install manually
+pip install build twine wheel
 ```
 
 ### Publishing Steps

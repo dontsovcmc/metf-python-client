@@ -12,12 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ESP32C6 Super Mini board support with pin definitions
 - Serial port sniffing functionality (`serial_begin`, `serial_read`, `serial_readlines`)
 - `serial_readlines()` with delimiter and prefix support for parsing serial output
-- Build script (build.py)
 
 ### Changed
 - Improved project packaging with modern pyproject.toml
+- Migrated to modern build system using `python -m build` (removed deprecated setup.py and build.py)
 - Enhanced documentation in English
-- Updated setup.py with comprehensive metadata
+- Updated metadata and license format to current standards
 
 ## [0.1] - 2020-11-05
 
