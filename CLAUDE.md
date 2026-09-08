@@ -273,6 +273,7 @@ The ESP board firmware provides these endpoints:
 - `/serial` - Serial port operations (POST/GET: various parameters)
 - `/rgb` - RGB LED control (POST: action, parameters)
 - `/read` - Read serial data (GET)
+- `/read/stat` - Log ring state as JSON: lines, dropped, baud, capacity, line_len, bytes (GET, METF 5+)
 
 ## Project Structure
 

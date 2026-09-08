@@ -179,7 +179,27 @@ for line in lines:
 
 # Flush serial buffer
 api.serial_flush()
+
+# Check the log ring before trusting what was read (METF 5+)
+stat = api.serial_stat()
+assert stat['dropped'] == 0, f"log lost {stat['dropped']} lines"
 ```
+
+`serial_stat()` returns the state of the ring buffer the board keeps the log in:
+
+| field | meaning |
+|---|---|
+| `lines` | lines waiting to be read |
+| `dropped` | lines evicted since the last flush because the ring was full |
+| `baud` | current speed of the serial port |
+| `capacity` | how many lines the ring holds |
+| `line_len` | characters per line, including the terminator |
+| `bytes` | total size of the ring |
+
+`dropped > 0` means the ring overflowed before anyone read it: `serial_read()`
+returns a shorter log, not an error, so a test written on top of it passes for
+the wrong reason. Either read more often, or build the firmware with a larger
+`ASB_BUFFER_BYTES`.
 
 ### RGB LED Control
 

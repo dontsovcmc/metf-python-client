@@ -116,6 +116,31 @@ class METFClient:
         ret = self._sess.post(self._root + '/serial', data=data, timeout=self._timeout)
         ret.raise_for_status()
 
+    def serial_stat(self) -> dict:
+        """
+        Log ring state: how much is waiting, how much was lost.
+
+        `dropped` counts the lines the ring evicted because nobody read them in
+        time. Eviction is silent: `serial_read()` then returns a shorter log,
+        not an error, and a test written on top of it passes for the wrong
+        reason. Check this before trusting the log, and read more often or
+        build the firmware with a bigger `ASB_BUFFER_BYTES`.
+
+        Requires METF protocol 5. On older firmware `/read/stat` is served by
+        the `/read` handler, which would drain the buffer, so a non-JSON answer
+        is reported instead of being parsed.
+
+        :return: dict with lines, dropped, baud, capacity, line_len, bytes
+        """
+        log.info('serial_stat')
+        ret = self._sess.get(self._root + '/read/stat', timeout=self._timeout)
+        ret.raise_for_status()
+        if 'application/json' not in ret.headers.get('Content-Type', ''):
+            raise RuntimeError(
+                '/read/stat needs METF 5: the request was answered by /read, '
+                'and the log buffer has just been drained')
+        return ret.json()
+
     def serial_read(self):
         log.info('serial_read')
         ret = self._sess.get(self._root + '/read', timeout=self._timeout)
